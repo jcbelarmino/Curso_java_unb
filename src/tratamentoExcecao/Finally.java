@@ -2,11 +2,14 @@ package tratamentoExcecao;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class Finally {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		FileWriter arquivo = null;
 		try {
-			FileWriter arquivo = new FileWriter(new File("teste"));
+			arquivo = new FileWriter(new File("teste"));
+			arquivo.write("teste de arquivo");
 			// Código que pode gerar uma exceção
 		} catch (Exception e) {
 			// Código a ser executado caso ocorra uma exceção
