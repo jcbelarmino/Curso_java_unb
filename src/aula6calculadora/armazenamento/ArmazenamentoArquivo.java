@@ -21,12 +21,17 @@ public class ArmazenamentoArquivo implements  Armazenamento {
 
 	@Override
 	public void salvarExpressao(String id, String expressao) {
-	
+		
 	}
 
 	@Override
 	public void salvarOperacao(String id, Nodo operacao) {
-	
+		try (FileOutputStream fileOutputStream = new FileOutputStream(diretorio + id + "_operacao.obj");
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+			objectOutputStream.writeObject(operacao);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -41,7 +46,13 @@ public class ArmazenamentoArquivo implements  Armazenamento {
 
 	@Override
 	public Operacao recuperarOperacao(String id) {
-		
+		try (FileInputStream fileInputStream = new FileInputStream(diretorio + id + "_operacao.obj");
+				ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+			return (Operacao) objectInputStream.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
@@ -50,7 +61,10 @@ public class ArmazenamentoArquivo implements  Armazenamento {
 	}
 
 	@Override
-	public List<String> listarExpressoes() {}
+	public List<String> listarExpressoes() {
+		
+	}
+
 	
 		
 }
