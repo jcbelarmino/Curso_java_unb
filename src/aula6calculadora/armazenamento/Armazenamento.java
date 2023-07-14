@@ -5,7 +5,7 @@ import java.util.List;
 import aula6calculadora.framework.Nodo;
 import aula6calculadora.framework.Operacao;
 
-public abstract class Armazenamento {
+public interface Armazenamento {
 	public abstract void salvarExpressao(String id, String expressao);
 
 	public abstract void salvarOperacao(String id, Nodo operacao);

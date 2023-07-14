@@ -3,6 +3,7 @@ package aula6calculadora.armazenamento;
 import java.util.List;
 
 import aula6calculadora.framework.Divisao;
+import aula6calculadora.framework.Expo;
 import aula6calculadora.framework.Multiplicacao;
 import aula6calculadora.framework.Nodo;
 import aula6calculadora.framework.Operacao;
@@ -12,6 +13,7 @@ import aula6calculadora.framework.Valor;
 public class Main {
 	public static void main(String[] args) {
 		Armazenamento armazenamento = new ArmazenamentoArquivo();
+//		Armazenamento armazenamento = new ArmazenamentoH2();
 
 		// Expressões a serem armazenadas
 		String expressao1 = "(5 + (10 / 2))";
@@ -82,7 +84,7 @@ public class Main {
 				} else if (caractere == ')') {
 					nivelParenteses--;
 				} else if (nivelParenteses == 1
-						&& (caractere == '+' || caractere == '-' || caractere == '*' || caractere == '/')) {
+						&& (caractere == '+' || caractere == '-' || caractere == '*' || caractere == '/' || caractere == '^')) {
 					indexOperador = i;
 				}
 			}
@@ -109,6 +111,8 @@ public class Main {
 					return new Multiplicacao(op1, op2);
 				case "/":
 					return new Divisao(op1, op2);
+				case "^":
+					return new Expo(op1, op2);
 				default:
 					throw new IllegalArgumentException("Operador inválido.");
 				}
